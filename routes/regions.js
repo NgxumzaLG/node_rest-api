@@ -26,9 +26,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
    const { region_id, region_name } = req.body;
    try {
-      await regionsController.addRegion({ region_id, region_name });
+      await regionsController.addRegion(region_id, region_name);
 
-      res.status(201).json({ status: 'added successfully' });
+      res.status(201);
    } catch (error) {
       throw error;
    }
@@ -41,6 +41,17 @@ router.put('/:id', async (req, res) => {
       await regionsController.updateRegion(region_id, region_name, id);
 
       res.status(200).json({ status: 'updated successfully' });
+   } catch (error) {
+      throw error;
+   }
+});
+
+router.delete('/:id', async (req, res) => {
+   const id = Number(req.params.id);
+   try {
+      await regionsController.deleteRegion(id);
+
+      res.status(204);
    } catch (error) {
       throw error;
    }

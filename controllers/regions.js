@@ -13,11 +13,11 @@ const getById = async (id) => {
    return results.rows;
 };
 
-const addRegion = async ({ region_id, region_name }) => {
+const addRegion = async (...region) => {
    const query = `INSERT INTO regions (region_id, region_name) 
                   VALUES ($1, $2)`;
 
-   await db.query(query, [region_id, region_name]);
+   await db.query(query, region);
    return;
 };
 
@@ -29,9 +29,18 @@ const updateRegion = async (...region) => {
    return;
 };
 
+const deleteRegion = async (id) => {
+   const query = `DELETE FROM regions
+                  WHERE region_id = $1`;
+
+   await db.query(query, [id]);
+   return;
+};
+
 module.exports = {
    getAll,
    getById,
    addRegion,
    updateRegion,
+   deleteRegion,
 };

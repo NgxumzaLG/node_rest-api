@@ -10,6 +10,7 @@ const departmentsRouter = require('./routes/departments');
 const jobsRouter = require('./routes/jobs');
 const employeesRouter = require('./routes/employees');
 const dependentsRouter = require('./routes/dependents');
+const extendsRouter = require('./routes/extends');
 
 dotenv.config();
 const app = express();
@@ -29,6 +30,7 @@ app.use('/departments', departmentsRouter);
 app.use('/jobs', jobsRouter);
 app.use('/employees', employeesRouter);
 app.use('/dependents', dependentsRouter);
+app.use('/extends', extendsRouter);
 
 app.listen(port, () => {
    console.log(`Server listening at http://localhost:${port}`);
