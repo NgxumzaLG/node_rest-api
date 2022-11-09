@@ -17,7 +17,8 @@ router.get('/:id', async (req, res) => {
    try {
       const results = await jobsController.getById(id);
 
-      res.status(200).json(results);
+      if (results.length == 0) res.status(404).json({ id, status: 'Not Found' });
+      else res.status(200).json(results);
    } catch (error) {
       throw error;
    }
@@ -25,10 +26,22 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
    const { job_id, job_title, min_salary, max_salary } = req.body;
+   const id = Number(job_id);
    try {
-      await jobsController.addJob(job_id, job_title, min_salary, max_salary);
+      const checkJob = await jobsController.getById(id);
 
-      res.status(201);
+      if (checkJob.length == 0) {
+         await jobsController.addJob(
+            id,
+            job_title,
+            Number(min_salary),
+            Number(max_salary)
+         );
+
+         res.status(201).json({ id, status: 'Job successfully added' });
+      } else {
+         res.status(400).json({ id, status: 'Already exists' });
+      }
    } catch (error) {
       throw error;
    }
@@ -36,12 +49,23 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
    const id = Number(req.params.id);
-   const { job_id, job_title, min_salary, max_salary } = req.body;
+   const { job_title, min_salary, max_salary } = req.body;
 
    try {
-      await jobsController.updateJob(job_id, job_title, min_salary, max_salary, id);
+      const checkJob = await jobsController.getById(id);
 
-      res.status(200).json({ status: 'updated successfully' });
+      if (checkJob.length > 0) {
+         await jobsController.updateJob(
+            id,
+            job_title,
+            Number(min_salary),
+            Number(max_salary)
+         );
+
+         res.status(200).json({ id, status: 'Job successfully updated' });
+      } else {
+         res.status(404).json({ id, status: 'Not Found' });
+      }
    } catch (error) {
       throw error;
    }
@@ -52,7 +76,7 @@ router.delete('/:id', async (req, res) => {
    try {
       await jobsController.deleteJob(id);
 
-      res.status(204);
+      res.status(204).json();
    } catch (error) {
       throw error;
    }

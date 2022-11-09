@@ -22,8 +22,8 @@ const addCountry = async (...country) => {
 };
 
 const updateCountry = async (...country) => {
-   const query = `UPDATE countries SET country_id = $1, country_name = $2, region_id = $3
-                  WHERE country_id = $4`;
+   const query = `UPDATE countries SET country_name = $2, region_id = $3
+                  WHERE country_id = $1`;
 
    await db.query(query, country);
    return;

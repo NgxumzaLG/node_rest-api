@@ -23,9 +23,9 @@ const addEmployee = async (...employee) => {
 };
 
 const updateEmployee = async (...employee) => {
-   const query = `UPDATE employees SET employee_id = $1, first_name = $2, last_name = $3, email = $4,
-                  phone_number = $5, hire_date = $6, job_id = $7, salary = $8, manager_id = $9, department_id = $10
-                  WHERE employee_id = $11`;
+   const query = `UPDATE employees SET first_name = $2, last_name = $3, email = $4, phone_number = $5,
+                  hire_date = $6, job_id = $7, salary = $8, manager_id = $9, department_id = $10
+                  WHERE employee_id = $1`;
 
    await db.query(query, employee);
    return;

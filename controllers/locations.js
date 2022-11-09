@@ -23,9 +23,9 @@ const addLocation = async (...location) => {
 };
 
 const updateLocation = async (...location) => {
-   const query = `UPDATE locations SET location_id = $1, street_address = $2, postal_code = $3, 
+   const query = `UPDATE locations SET street_address = $2, postal_code = $3, 
                   city = $4, state_province = $5, country_id = $6
-                  WHERE location_id = $7`;
+                  WHERE location_id = $1`;
 
    await db.query(query, location);
    return;

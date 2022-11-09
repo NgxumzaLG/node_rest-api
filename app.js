@@ -30,7 +30,7 @@ app.use('/departments', departmentsRouter);
 app.use('/jobs', jobsRouter);
 app.use('/employees', employeesRouter);
 app.use('/dependents', dependentsRouter);
-app.use('/extends', extendsRouter);
+app.use('/task2', extendsRouter);
 
 app.listen(port, () => {
    console.log(`Server listening at http://localhost:${port}`);

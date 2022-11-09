@@ -22,8 +22,8 @@ const addJob = async (...job) => {
 };
 
 const updateJob = async (...job) => {
-   const query = `UPDATE jobs SET job_id = $1, job_title = $2, min_salary = $3, max_salary = $4
-                  WHERE job_id = $5`;
+   const query = `UPDATE jobs SET job_title = $2, min_salary = $3, max_salary = $4
+                  WHERE job_id = $1`;
 
    await db.query(query, job);
    return;

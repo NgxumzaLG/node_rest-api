@@ -22,8 +22,8 @@ const addDepartment = async (...department) => {
 };
 
 const updateDepartment = async (...department) => {
-   const query = `UPDATE departments SET department_id = $1, department_name = $2, location_id = $3
-                  WHERE department_id = $4`;
+   const query = `UPDATE departments SET department_name = $2, location_id = $3
+                  WHERE department_id = $1`;
 
    await db.query(query, department);
    return;

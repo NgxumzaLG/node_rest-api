@@ -14,8 +14,8 @@ const getById = async (id) => {
 };
 
 const addDependent = async (...dependent) => {
-   const query = `INSERT INTO dependents (dependent_id, first_name, last_name, relationship, 
-                  employee_id) 
+   const query = `INSERT INTO dependents (dependent_id, first_name, last_name,
+                  relationship, employee_id) 
                   VALUES ($1, $2, $3, $4, $5)`;
 
    await db.query(query, dependent);
@@ -23,9 +23,9 @@ const addDependent = async (...dependent) => {
 };
 
 const updateDependent = async (...dependent) => {
-   const query = `UPDATE dependents SET dependent_id = $1, first_name = $2, last_name = $3,
+   const query = `UPDATE dependents SET first_name = $2, last_name = $3,
                   relationship = $4, employee_id = $5
-                  WHERE dependent_id = $6`;
+                  WHERE dependent_id = $1`;
 
    await db.query(query, dependent);
    return;

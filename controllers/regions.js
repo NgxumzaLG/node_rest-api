@@ -21,11 +21,11 @@ const addRegion = async (...region) => {
    return;
 };
 
-const updateRegion = async (...region) => {
-   const query = `UPDATE regions SET region_id = $1, region_name = $2 
-                  WHERE region_id = $3`;
+const updateRegion = async (id, regionName) => {
+   const query = `UPDATE regions SET region_name = $2 
+                  WHERE region_id = $1`;
 
-   await db.query(query, region);
+   await db.query(query, [id, regionName]);
    return;
 };
 
