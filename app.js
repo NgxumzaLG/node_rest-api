@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const serverless = require('serverless-http');
 
 const indexRouter = require('./routes/');
 const regionsRouter = require('./routes/regions');
@@ -32,6 +33,10 @@ app.use('/employees', employeesRouter);
 app.use('/dependents', dependentsRouter);
 app.use('/task2', extendsRouter);
 
-app.listen(port, () => {
-   console.log(`Server listening at http://localhost:${port}`);
-});
+if (process.env.ENVIRONMENT === 'lambdaFunction') {
+   module.exports.handler = serverless(app);
+} else {
+   app.listen(port, () => {
+      console.log(`Server listening at http://localhost:${port}`);
+   });
+}

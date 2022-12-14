@@ -20,7 +20,8 @@
    "homepage": "https://github.com/NgxumzaLG/node_rest-api#readme",
    "dependencies": {
       "express": "^4.18.2",
-      "pg": "^8.8.0"
+      "pg": "^8.8.0",
+      "serverless-http": "^3.1.0"
    },
    "devDependencies": {
       "dotenv": "^16.0.3",

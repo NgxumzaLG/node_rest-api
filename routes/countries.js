@@ -74,9 +74,14 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
    const id = req.params.id;
    try {
-      await countriesController.deleteCountry(id);
+      const results = await countriesController.getById(id);
 
-      res.status(204).json();
+      if (results.length == 0) {
+         res.status(404).json({ id, status: 'Not Found' });
+      } else {
+         await countriesController.deleteCountry(id);
+         res.status(204).json();
+      }
    } catch (error) {
       throw error;
    }
